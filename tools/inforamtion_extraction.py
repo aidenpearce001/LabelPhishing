@@ -2,6 +2,8 @@
 import whois
 from datetime import datetime
 import requests
+import whois
+import ssl, socket
 
 ca = ['cPanel,',
  'Microsoft',
@@ -35,17 +37,17 @@ ca = ['cPanel,',
  'Sectigo',
  'Secure']
 
-def getLength(url):
+def getLength(domain):
     try:      
-        domain_name = whois.whois(urlparse(url).netloc)   
+        domain_name = domain
         return len(domain_name)
     except:
         print("Cant get domain name")
         return None
  
-def domainAge(url):
+def domainAge(domain):
     try:
-        domain_name = whois.whois(urlparse(url).netloc)
+        domain_name = domain
         creation_date = domain_name.creation_date
         expiration_date = domain_name.expiration_date
         if (isinstance(creation_date,str) or isinstance(expiration_date,str)):
@@ -66,10 +68,10 @@ def domainAge(url):
         print("Cant get domain name")
         return None
 
-def extract_ca(url):
+def extract_ca(domain):
     
     try:
-        hostname = whois.whois(urlparse(url).netloc)
+        hostname = domain
         ctx = ssl.create_default_context()
         with ctx.wrap_socket(socket.socket(), server_hostname=hostname) as s:
             s.settimeout(5)
@@ -82,5 +84,18 @@ def extract_ca(url):
         issued_by = issuer['commonName']
 
         return issued_by
+    except:
+        print(f"DOMAIN {domain} ERROR")
+
+def extract(url):
+    try:
+        data = {}
+        domain = whois.whois(urlparse(url).netloc)
+
+        data['url length'] = getLength(domain)
+        data['Domain Age'] = domainAge(domain)
+        data['Authority Certificate'] = extract_ca(domain)
+
+        return data
     except:
         print(f"DOMAIN {domain} ERROR")
