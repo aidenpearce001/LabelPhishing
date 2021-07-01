@@ -55,11 +55,11 @@ def domainAge(domain):
                 creation_date = datetime.strptime(creation_date,'%Y-%m-%d')
                 expiration_date = datetime.strptime(expiration_date,"%Y-%m-%d")
             except:
-                return 1
+                return None
         if ((expiration_date is None) or (creation_date is None)):
-            return 1
+            return None
         elif ((type(expiration_date) is list) or (type(creation_date) is list)):
-            return 1
+            return None
         else:
             ageofdomain = abs((expiration_date - creation_date).days)
 
@@ -87,10 +87,27 @@ def extract_ca(domain):
     except:
         print(f"DOMAIN {domain} ERROR")
 
+def js_analysis(url):
+
+    js_extract = {}
+    response = requests.get(url)
+    raw_html = response.text
+    js_extract['number eval'] = raw_html.count("eval")
+    js_extract['number iframe'] = raw_html.count("iframe")
+    js_extract['number unescape'] = raw_html.count("unescape")
+    js_extract['number escape'] = raw_html.count("escape")
+    js_extract['number ActiveXObject'] = raw_html.count("ActiveXObject")
+    js_extract['number concat'] = raw_html.count("concat")
+    js_extract['number fromCharCode'] = raw_html.count("fromCharCode")
+    js_extract['number atob'] = raw_html.count("atob")
+
+    return js_extract
 def extract(url):
     try:
         data = {}
         domain = whois.whois(urlparse(url).netloc)
+        # if len(domain <= 6):
+        #     return 1
 
         data['url length'] = getLength(domain)
         data['Domain Age'] = domainAge(domain)
@@ -99,3 +116,4 @@ def extract(url):
         return data
     except:
         print(f"DOMAIN {domain} ERROR")
+
