@@ -112,7 +112,8 @@ def extract(url):
         data['url length'] = getLength(domain)
         data['Domain Age'] = domainAge(domain)
         data['Authority Certificate'] = extract_ca(domain)
-
+        data['js'] = js_analysis(url)
+        
         return data
     except:
         print(f"DOMAIN {domain} ERROR")
