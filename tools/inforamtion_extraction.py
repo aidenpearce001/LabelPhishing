@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 import whois
 import ssl, socket
+from urllib.parse import urlparse,urlencode
 
 ca = ['cPanel,',
  'Microsoft',
@@ -71,11 +72,10 @@ def domainAge(domain):
 def extract_ca(domain):
     
     try:
-        hostname = domain
         ctx = ssl.create_default_context()
-        with ctx.wrap_socket(socket.socket(), server_hostname=hostname) as s:
+        with ctx.wrap_socket(socket.socket(), server_hostname=domain['domain_name']) as s:
             s.settimeout(5)
-            s.connect((hostname, 443))
+            s.connect((domain['domain_name'], 443))
             cert = s.getpeercert()
 
         subject = dict(x[0] for x in cert['subject'])
@@ -103,7 +103,7 @@ def js_analysis(url):
 
     return js_extract
 def extract(url):
-    try:
+    # try:
         data = {}
         domain = whois.whois(urlparse(url).netloc)
         # if len(domain <= 6):
@@ -115,6 +115,8 @@ def extract(url):
         data['js'] = js_analysis(url)
         
         return data
-    except:
-        print(f"DOMAIN {domain} ERROR")
+    # except:
+    #     return data
+        # print(f"DOMAIN {domain} ERROR")
 
+print(extract("https://www.facebook.com/"))
