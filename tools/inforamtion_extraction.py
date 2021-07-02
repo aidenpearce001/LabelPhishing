@@ -103,7 +103,7 @@ def js_analysis(url):
 
     return js_extract
 def extract(url):
-    # try:
+    try:
         data = {}
         domain = whois.whois(urlparse(url).netloc)
         # if len(domain <= 6):
@@ -115,8 +115,8 @@ def extract(url):
         data['js'] = js_analysis(url)
         
         return data
-    # except:
-    #     return data
+    except:
+        return data
         # print(f"DOMAIN {domain} ERROR")
 
 print(extract("https://www.facebook.com/"))
