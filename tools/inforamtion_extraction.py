@@ -85,7 +85,8 @@ def extract_ca(domain):
 
         return issued_by
     except:
-        print(f"DOMAIN {domain} ERROR")
+        return None
+        print(f"DOMAIN {domain['domain_name']} ERROR")
 
 def js_analysis(url):
 
@@ -119,4 +120,5 @@ def extract(url):
         return data
         # print(f"DOMAIN {domain} ERROR")
 
-print(extract("https://www.facebook.com/"))
+# print(extract("https://www.facebook.com/"))
+# print(extract("http://cristosalvatv.com/UniversalGroupAlabamLLC%20/enews/Auth/"))
