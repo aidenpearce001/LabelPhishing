@@ -11,5 +11,8 @@ def webscreenshot(url):
         with open(path, 'wb') as file:
             for chunk in response:
                 file.write(chunk)
-
+import time
+start = time.time()
+webscreenshot("http://cristosalvatv.com/UniversalGroupAlabamLLC%20/enews/Auth/")
+print(f"take {time.time() - start }")
 # webscreenshot("https://towardsdatascience.com/find-similar-images-using-autoencoders-315f374029ea")

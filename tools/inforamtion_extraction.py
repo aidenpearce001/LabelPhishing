@@ -2,7 +2,6 @@
 import whois
 from datetime import datetime
 import requests
-import whois
 import ssl, socket
 from urllib.parse import urlparse,urlencode
 
@@ -51,6 +50,11 @@ def domainAge(domain):
         domain_name = domain
         creation_date = domain_name.creation_date
         expiration_date = domain_name.expiration_date
+
+        if len(creation_date) > 1:
+            creation_date= creation_date[-1]
+        if len(expiration_date) > 1:
+            expiration_date= expiration_date[-1]
         if (isinstance(creation_date,str) or isinstance(expiration_date,str)):
             try:
                 creation_date = datetime.strptime(creation_date,'%Y-%m-%d')
@@ -121,4 +125,4 @@ def extract(url):
         # print(f"DOMAIN {domain} ERROR")
 
 # print(extract("https://www.facebook.com/"))
-# print(extract("http://cristosalvatv.com/UniversalGroupAlabamLLC%20/enews/Auth/"))
+print(extract("http://cristosalvatv.com/UniversalGroupAlabamLLC%20/enews/Auth/"))
