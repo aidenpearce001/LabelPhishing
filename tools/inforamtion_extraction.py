@@ -37,13 +37,8 @@ ca = ['cPanel,',
  'Sectigo',
  'Secure']
 
-def getLength(domain):
-    try:      
-        domain_name = domain
-        return len(domain_name)
-    except:
-        print("Cant get domain name")
-        return None
+def getLength(url):
+    return len(url)
  
 def domainAge(domain):
     try:
@@ -114,7 +109,7 @@ def extract(url):
         # if len(domain <= 6):
         #     return 1
 
-        data['url length'] = getLength(domain)
+        data['url length'] = getLength(url)
         data['Domain Age'] = domainAge(domain)
         data['Authority Certificate'] = extract_ca(domain)
         data['js'] = js_analysis(url)
