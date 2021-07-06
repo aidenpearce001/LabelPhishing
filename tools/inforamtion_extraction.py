@@ -121,6 +121,11 @@ def extract(url):
         
         return data
     except:
+        data['url length'] = getLength(domain)
+        data['Domain Age'] = None
+        data['Authority Certificate'] = None
+        data['js'] = None
+        
         return data
         # print(f"DOMAIN {domain} ERROR")
 
