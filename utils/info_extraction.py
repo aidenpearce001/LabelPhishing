@@ -5,38 +5,6 @@ import requests
 import ssl, socket
 from urllib.parse import urlparse,urlencode
 
-ca = ['cPanel,',
- 'Microsoft',
- 'HydrantID',
- 'AlphaSSL',
- 'GTS',
- 'RapidSSL',
- 'DFN-Verein',
- 'Cloudflare',
- 'GeoTrust',
- 'QuoVadis',
- 'Certum',
- 'Amazon',
- 'Gandi',
- 'COMODO',
- 'Go',
- 'Cybertrust',
- 'GlobalSign',
- 'Yandex',
- 'R3',
- 'Network',
- 'DigiCert',
- 'GoGetSSL',
- 'Thawte',
- 'Apple',
- 'Starfield',
- 'RU-CENTER',
- 'Trustwave',
- 'Entrust',
- 'InCommon',
- 'Sectigo',
- 'Secure']
-
 def getLength(url):
     return len(url)
  
