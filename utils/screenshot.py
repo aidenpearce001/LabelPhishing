@@ -13,5 +13,5 @@ def screenshot(url):
         driver.get_screenshot_as_file(path)
         driver.quit()
     except:
-        driver.quit()
+        #driver.quit()
         print(f"cannot get {url}")
