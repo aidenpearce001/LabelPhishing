@@ -4,6 +4,8 @@ from datetime import datetime
 import requests
 import ssl, socket
 from urllib.parse import urlparse,urlencode
+import urllib
+from bs4 import BeautifulSoup
 
 def getLength(url):
     return len(url)
@@ -70,6 +72,25 @@ def js_analysis(url):
     js_extract['number atob'] = raw_html.count("atob")
 
     return js_extract
+
+def web_traffic(url):
+    """
+    get alexa web traffic
+    """
+    try:
+    #Filling the whitespaces in the URL if any
+        url = urllib.parse.quote(url)
+        rank = BeautifulSoup(urllib.request.urlopen("http://data.alexa.com/data?cli=10&dat=s&url=" + url).read(), "xml").find("REACH")['RANK']
+        rank = int(rank)
+        print("Rank number: ", rank)
+    except TypeError:
+        print("Cant get web traffic")
+        return 1
+    if rank <100000:
+        return 0
+    else:
+        return 1
+
 def extract(url):
     try:
         data = {}
@@ -87,8 +108,10 @@ def extract(url):
             data['Domain Age'] = domainAge(domain)
             data['Authority Certificate'] = extract_ca(domain)
             data['js'] = js_analysis(url)
-            
+            data['alexa_rank'] = web_traffic(url)
+
             return data
+
     except:
         data['url length'] = getLength(url)
         data['Domain Age'] = None
@@ -96,4 +119,7 @@ def extract(url):
         data['js'] = None
         
         return data
-        
+
+if __name__ == "__main__":
+    data = extract("https://drive.google.com/drive/u/1/folders/1qwcFV81rvbz8oMevyigWpbAmYSLchkxp")
+    print(data)
