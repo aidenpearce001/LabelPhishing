@@ -26,7 +26,7 @@
       <x>680</x>
       <y>130</y>
       <width>531</width>
-      <height>391</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -188,7 +188,7 @@
       <x>890</x>
       <y>360</y>
       <width>110</width>
-      <height>141</height>
+      <height>161</height>
      </rect>
     </property>
     <item>
@@ -231,6 +231,11 @@
       <string>Atob</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>alexa rank</string>
+     </property>
+    </item>
    </widget>
    <widget class="QListWidget" name="listWidget_2">
     <property name="geometry">
@@ -238,7 +243,7 @@
       <x>1000</x>
       <y>360</y>
       <width>111</width>
-      <height>141</height>
+      <height>161</height>
      </rect>
     </property>
    </widget>
@@ -323,7 +328,7 @@
     <property name="geometry">
      <rect>
       <x>1020</x>
-      <y>540</y>
+      <y>550</y>
       <width>71</width>
       <height>51</height>
      </rect>
@@ -352,7 +357,7 @@
     <property name="geometry">
      <rect>
       <x>850</x>
-      <y>540</y>
+      <y>550</y>
       <width>71</width>
       <height>51</height>
      </rect>

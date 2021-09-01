@@ -117,6 +117,7 @@ def extract(url):
         data['Domain Age'] = None
         data['Authority Certificate'] = None
         data['js'] = None
+        data['alexa_rank'] = None
         
         return data
 

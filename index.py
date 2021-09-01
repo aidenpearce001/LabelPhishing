@@ -24,7 +24,7 @@ class Index(QMainWindow, main):
         fname = QFileDialog.getOpenFileName(self, 'Open File', filter='*.txt')
         urls = readTxt(fname[0])
         labelFolder("images")
-        os.mkdir('labeled')
+        labelFolder("labeled")
         self.data_info(urls[0])
         self.handel_data(urls)
         
@@ -52,9 +52,7 @@ class Index(QMainWindow, main):
 
         self.n = n - 1
         self.listWidget_2.clear()
-        self.data_info(urls[self.n])
-        self.label_13.setText("Done")
-    
+        self.data_info(urls[self.n])    
     
     def data_info(self, url):
         screenshot(url)
@@ -75,7 +73,7 @@ class Index(QMainWindow, main):
         self.label_12.setText(str(data["Authority Certificate"]))
         
         if data["js"] == None:
-            for i in range(8):
+            for i in range(9):
                 self.listWidget_2.addItem(str(0))
         else:
             for i in list(data["js"].values()):
