@@ -24,6 +24,7 @@ class Index(QMainWindow, main):
         fname = QFileDialog.getOpenFileName(self, 'Open File', filter='*.txt')
         urls = readTxt(fname[0])
         labelFolder("images")
+        os.mkdir('labeled')
         self.data_info(urls[0])
         self.handel_data(urls)
         
