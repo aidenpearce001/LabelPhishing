@@ -4,7 +4,7 @@ from datetime import datetime
 import requests
 import ssl, socket
 from urllib.parse import urlparse
-import urllib
+import urllib.request
 from bs4 import BeautifulSoup
 
 def getLength(url):
@@ -35,7 +35,7 @@ def domainAge(domain):
 
             return ageofdomain
     except:
-        print("Cant get domain name")
+        print(f"Cant get domain name {}")
         return None
 
 def extract_ca(domain):
@@ -96,6 +96,7 @@ def extract(url):
         domain = whois.whois(urlparse(url).netloc)
 
         if domain['domain_name'] == None:
+            data['url'] = url
             data['url length'] = getLength(url)
             data['Domain Age'] = None
             data['Authority Certificate'] = None
@@ -104,6 +105,7 @@ def extract(url):
 
             return data
         else:
+            data['url'] = url
             data['url length'] = getLength(url)
             data['Domain Age'] = domainAge(domain)
             data['Authority Certificate'] = extract_ca(domain)
@@ -113,6 +115,7 @@ def extract(url):
             return data
 
     except:
+        data['url'] = url
         data['url length'] = getLength(url)
         data['Domain Age'] = None
         data['Authority Certificate'] = None

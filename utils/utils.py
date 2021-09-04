@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 
 def readTxt(path):
     with open(path) as f:
@@ -13,3 +14,9 @@ def labelFolder(directory):
         pass
     else:
         os.mkdir(path)
+
+def toCSV(path, data):
+    json = []
+    json.append(list(data.values()))
+    df = pd.DataFrame(json)
+    df.to_csv(f'{path}/label.csv', mode='a', header = False)

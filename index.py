@@ -4,9 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUiType
 import sys
 import os
-import json
 
-from utils.utils import readTxt, labelFolder
+from utils.utils import readTxt, labelFolder, toCSV
 from utils.info_extraction import *
 from utils.screenshot import screenshot
 
@@ -34,20 +33,20 @@ class Index(QMainWindow, main):
         self.commandLinkButton_2.clicked.connect(lambda: self.prev(self.n, urls))
     
     def next(self, n, urls):
-        label_path = 'labeled/'+urls[n].split("/")[2]+'.txt'
+        label_path = 'labeled/'
         data = extract(urls[n])
         data['label'] = self.comboBox.currentText()
-        self.save_file(label_path, data)
+        toCSV(label_path, data)
 
         self.n = n + 1
         self.listWidget_2.clear()
         self.data_info(urls[self.n])
     
     def prev(self, n, urls):
-        label_path = 'labeled/'+urls[n].split("/")[2]+'.txt'
+        label_path = 'labeled/'
         data = extract(urls[n])
         data['label'] = self.comboBox.currentText()
-        self.save_file(label_path, data)
+        toCSV(label_path, data)
 
         self.n = n - 1
         self.listWidget_2.clear()
@@ -79,10 +78,6 @@ class Index(QMainWindow, main):
                 self.listWidget_2.addItem(str(i))
 
         self.label_15.setText(str(data['alexa_rank']))
-        
-    def save_file(self, path, data):
-        with open(path, "w") as f:
-            f.write(json.dumps(data))
 
 def main():
     app = QApplication(sys.argv)
