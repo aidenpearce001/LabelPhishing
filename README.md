@@ -15,4 +15,7 @@ python3 index.py
 - When finish, the window looks like below. Based on the feature points appear, you choose the appropriate label for each url
 ![alt text](./imgs/2.png)
 
+- When you click next or previous arrow, the data will be saved automatically
+- the program is abit slow so don't rush
+
 
