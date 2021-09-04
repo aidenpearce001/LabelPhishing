@@ -5,7 +5,6 @@ from PyQt5.uic import loadUiType
 import sys
 import os
 import json
-from selenium import webdriver
 
 from utils.utils import readTxt, labelFolder
 from utils.info_extraction import *
@@ -73,11 +72,13 @@ class Index(QMainWindow, main):
         self.label_12.setText(str(data["Authority Certificate"]))
         
         if data["js"] == None:
-            for i in range(9):
+            for i in range(8):
                 self.listWidget_2.addItem(str(0))
         else:
             for i in list(data["js"].values()):
                 self.listWidget_2.addItem(str(i))
+
+        self.label_15.setText(str(data['alexa_rank']))
         
     def save_file(self, path, data):
         with open(path, "w") as f:

@@ -3,7 +3,7 @@ import whois
 from datetime import datetime
 import requests
 import ssl, socket
-from urllib.parse import urlparse,urlencode
+from urllib.parse import urlparse
 import urllib
 from bs4 import BeautifulSoup
 
@@ -82,10 +82,9 @@ def web_traffic(url):
         url = urllib.parse.quote(url)
         rank = BeautifulSoup(urllib.request.urlopen("http://data.alexa.com/data?cli=10&dat=s&url=" + url).read(), "xml").find("REACH")['RANK']
         rank = int(rank)
-        print("Rank number: ", rank)
     except TypeError:
-        print("Cant get web traffic")
         return 1
+
     if rank <100000:
         return 0
     else:
@@ -101,7 +100,8 @@ def extract(url):
             data['Domain Age'] = None
             data['Authority Certificate'] = None
             data['js'] = None
-            
+            data['alexa_rank'] = web_traffic(url)
+
             return data
         else:
             data['url length'] = getLength(url)
@@ -117,10 +117,6 @@ def extract(url):
         data['Domain Age'] = None
         data['Authority Certificate'] = None
         data['js'] = None
-        data['alexa_rank'] = None
+        data['alexa_rank'] = web_traffic(url)
         
         return data
-
-if __name__ == "__main__":
-    data = extract("https://drive.google.com/drive/u/1/folders/1qwcFV81rvbz8oMevyigWpbAmYSLchkxp")
-    print(data)
