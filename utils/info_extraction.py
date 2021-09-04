@@ -35,7 +35,7 @@ def domainAge(domain):
 
             return ageofdomain
     except:
-        print("Cant get domain name")
+        print(f"Cant get domain name {domain}")
         return None
 
 def extract_ca(domain):
