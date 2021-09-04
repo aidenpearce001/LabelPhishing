@@ -12,7 +12,7 @@ python3 index.py
 
 - Clike op file on top of the program to select data file
 
-- When finish, the window looks like below. Based on the feature points appear, you choose the appropriate label for each url
+- When finished, the window looks like below. Based on the feature points appear, you choose the appropriate label for each url
 ![alt text](./imgs/2.png)
 
 - When you click next or previous arrow, the data will be saved automatically
